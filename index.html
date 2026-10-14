@@ -387,9 +387,18 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .cue{display:none}
   .road{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
 }
+/* ambient drift: uses individual translate/scale so it layers over existing transform-based reveals/hovers */
+@keyframes driftA{0%,100%{translate:0 0;scale:1.06}50%{translate:-1.6% -1.2%;scale:1.1}}
+@keyframes driftB{0%,100%{translate:0 0;scale:1.08}50%{translate:1.4% 1%;scale:1.05}}
+.media img,.smedia img,.val img,.band .bg{animation:driftA 22s ease-in-out infinite}
+.svc:nth-child(even) .media img,.sstep:nth-child(even) .mimg img,.smedia img:nth-child(even),.val:nth-child(even) img{animation-name:driftB;animation-duration:26s}
+.svc:nth-child(2) .media img,.val:nth-child(3) img,.smedia img:nth-child(3){animation-delay:-9s}
+.svc:nth-child(3) .media img,.val:nth-child(4) img,.smedia img:nth-child(4){animation-delay:-15s}
+.band .bg{animation-duration:30s}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .grain{animation:none}
+  .media img,.smedia img,.val img,.band .bg{animation:none}
   [data-r],.li,.media img,.band h2 .ch,.wordmark .wl,.statement .w,.smedia img,.val,.val img,.val p{transition:none!important;opacity:1;transform:none!important;filter:none}
   .band .frame{clip-path:none!important}.band .bg{transform:none!important}
 }
