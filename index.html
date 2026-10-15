@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Tim’s Logistics</title><meta name="description" content="Dependable logistics, package and product delivery built for speed and trust."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}</style></head><body>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Tim’s Logistics</title><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="theme-color" content="#071A2E"><meta name="description" content="Dependable logistics, package and product delivery built for speed and trust."><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}</style></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@300;400;500;600;700&display=swap">
@@ -289,29 +289,75 @@ section.block.services{padding-block:clamp(72px,10vh,104px)}
 /* light-section variant: navy ink lines, faded at top and bottom */
 .grid-bg.ink{background-image:linear-gradient(rgba(10,37,64,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(10,37,64,.06) 1px,transparent 1px);-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 88%,transparent)}
 .grid-bg+.wrap{position:relative}
-/* ---------- 04 how it works: a story told on scroll ---------- */
+/* ---------- 04 how it works: a pinned delivery journey. a truck drives the road, pausing at each stop ---------- */
 #how .grid-bg{-webkit-mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(transparent,#000 10%,#000 90%,transparent)}
-.story{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1.15fr);gap:0 clamp(20px,3vw,48px);position:relative}
-.rail{position:relative}
-.rail .track{position:absolute;left:13px;top:0;bottom:0;width:1px;background:var(--sand-15)}
-.rail .beam{position:absolute;left:13px;top:0;width:1px;height:100%;background:linear-gradient(var(--green-500),var(--green-500));transform-origin:top;transform:scaleY(0);box-shadow:0 0 12px rgba(47,191,113,.6)}
-.rail .node{position:absolute;left:7px;width:13px;height:13px;border-radius:50%;background:var(--navy-950);border:1px solid var(--sand-60);transition:background .4s,border-color .4s,box-shadow .4s}
-.rail .node.lit{background:var(--green-500);border-color:var(--green-500);box-shadow:0 0 0 5px rgba(47,191,113,.15)}
-.ssteps{list-style:none;margin:0;padding:0}
-.sstep{min-height:62vh;display:flex;flex-direction:column;justify-content:center;opacity:.32;transition:opacity .6s var(--E)}
-.sstep.act{opacity:1}
-.sstep .num{font:500 13px/1 var(--font-data);color:var(--green-500);letter-spacing:.08em}
-.sstep h3{font-size:clamp(30px,3.4vw,48px);font-weight:600;letter-spacing:-.025em;margin:14px 0 12px}
-.sstep p{color:var(--sand-60);font-size:17px;max-width:34ch}
-.sstep .mimg{display:none}
-.smedia{position:sticky;top:14vh;height:72vh;align-self:start;border-radius:16px;overflow:hidden;background:var(--navy-850)}
-.smedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .9s var(--E),transform 1.6s var(--E)}
-.smedia img.on{opacity:1;transform:scale(1)}
-.smedia .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,26,46,0) 50%,rgba(7,26,46,.75) 100%);z-index:1}
-.smedia .hud{position:absolute;left:26px;right:26px;bottom:24px;z-index:2;display:flex;justify-content:space-between;align-items:end;font:500 12px/1.4 var(--font-data);letter-spacing:.1em;text-transform:uppercase;color:var(--sand-60)}
-.smedia .hud b{display:block;font:600 clamp(20px,1.8vw,26px)/1.1 var(--font-display);letter-spacing:-.01em;text-transform:none;color:var(--sand-50);margin-top:6px}
-.smedia .hud .big{font:300 clamp(56px,6vw,96px)/.8 var(--font-data);letter-spacing:-.06em;color:var(--sand-50)}
-.story-end{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(36px,5vw,64px);padding-top:24px;border-top:1px solid var(--sand-15)}
+section.block.how{padding:0}
+.jr{position:relative;height:360vh}
+.jr-pin{position:sticky;top:0;height:100svh;display:flex;padding:clamp(84px,11vh,108px) 0 clamp(20px,3vh,32px)}
+.jr-pin>.wrap{flex:1;display:flex;position:relative}
+.jr-inner{flex:1;display:flex;flex-direction:column;width:100%;gap:clamp(18px,3vh,30px)}
+.jr-head{display:flex;justify-content:space-between;align-items:end;gap:20px 40px;flex-wrap:wrap}
+.jr-head .title{font-size:clamp(30px,1rem + 2.2vw,52px)}
+.jr-meta{display:flex;align-items:end;gap:32px}
+.jr-meta .body{margin:0;max-width:30ch;font-size:15px}
+.jr-ctr{display:flex;align-items:baseline;gap:8px;font-family:var(--font-data);font-variant-numeric:tabular-nums;color:var(--sand-50);overflow:hidden}
+.ctr-n{display:inline-block;font-weight:300;font-size:clamp(44px,2rem + 2vw,72px);line-height:.85;letter-spacing:-.06em}
+.ctr-n.roll{animation:ctrRoll .7s cubic-bezier(.19,1,.22,1)}
+@keyframes ctrRoll{from{transform:translateY(60%);opacity:0;filter:blur(4px)}to{transform:none;opacity:1;filter:none}}
+.ctr-of{font-size:13px;letter-spacing:.1em;color:var(--sand-60)}
+.jr-stage{flex:1;min-height:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+/* media: each stop wipes in left to right, the direction of travel */
+.jr-media{grid-column:1/span 7;position:relative;border-radius:6px;overflow:hidden;background:var(--navy-850);min-height:0}
+.jr-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 100% 0 0);transform:scale(1.12);
+  transition:clip-path 1.1s cubic-bezier(.65,0,.35,1),transform 1.8s cubic-bezier(.19,1,.22,1)}
+.jr-media img.on{clip-path:inset(0 0 0 0);transform:scale(1)}
+.jr-media img:first-child{clip-path:inset(0 0 0 0)}
+.jr-media .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,26,46,0) 55%,rgba(7,26,46,.7) 100%)}
+.jr-stop{position:absolute;left:22px;bottom:20px;z-index:2;font:500 12px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-50)}
+/* copy: one stop at a time, lines rise in with a stagger */
+.jr-copy{grid-column:8/span 5;position:relative;list-style:none;margin:0;padding:0;min-height:0}
+.jr-step{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:16px;pointer-events:none}
+.jr-step>*{opacity:0;transform:translateY(22px);filter:blur(4px);transition:opacity .35s ease,transform .35s ease,filter .35s ease}
+.jr-step.on{pointer-events:auto}
+.jr-step.on>*{opacity:1;transform:none;filter:none;transition:opacity .7s ease,transform 1s cubic-bezier(.19,1,.22,1),filter .7s ease}
+.jr-step.on>:nth-child(2){transition-delay:.08s}.jr-step.on>:nth-child(3){transition-delay:.16s}.jr-step.on>:nth-child(4){transition-delay:.24s}.jr-step.on>:nth-child(5){transition-delay:.32s}
+.jr-status{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;font:500 12px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-300);padding:9px 12px;border:1px solid var(--sand-15);border-radius:2px}
+.jr-status i{width:7px;height:7px;border-radius:50%;background:var(--green-500)}
+.jr-step h3{font-size:clamp(40px,1.4rem + 3.2vw,80px);font-weight:600;letter-spacing:-.045em;line-height:.95}
+.jr-step h3 em{display:block;font:italic 400 .82em/1 "Instrument Serif",Georgia,serif;letter-spacing:-.01em;color:var(--sand-300)}
+.jr-step p{margin:0;color:var(--sand-60);font-size:17px;line-height:1.5;max-width:32ch}
+.jr-facts{list-style:none;margin:4px 0 0;padding:0;border-top:1px solid var(--sand-15);max-width:340px}
+.jr-facts li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--sand-15);font:500 12px/1.2 var(--font-data);letter-spacing:.08em;text-transform:uppercase;color:var(--sand-50)}
+.jr-facts li::before{content:"";width:12px;height:1px;background:var(--green-500)}
+.jr-step .btn{align-self:flex-start}
+.jr-mimg{display:none}
+/* the road */
+.jr-road{position:relative;height:84px;flex:none;margin:0 clamp(8px,2vw,24px)}
+.rd-band{position:absolute;left:0;right:0;top:34px;height:12px;border-radius:6px;background:#0f2742;overflow:hidden;box-shadow:inset 0 0 0 1px var(--sand-08)}
+.rd-dash{position:absolute;left:0;right:0;top:5px;height:2px;background:repeating-linear-gradient(90deg,rgba(245,239,230,.28) 0 18px,transparent 18px 36px)}
+.rd-fill{position:absolute;left:0;top:0;bottom:0;width:100%;background:linear-gradient(90deg,rgba(47,191,113,.15),rgba(47,191,113,.55));transform-origin:left;transform:scaleX(0)}
+.rd-stops{list-style:none;margin:0;padding:0}
+.rd-stops li{position:absolute;top:28px;left:calc(var(--x) / 3 * 100%);translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:12px;font:500 11px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-60);transition:color .4s}
+.rd-stops li::before{content:"";width:24px;height:24px;border-radius:50%;background:var(--navy-950);border:1px solid var(--sand-15);box-sizing:border-box;transition:background .5s,border-color .5s}
+.rd-stops li b{display:none}
+.rd-stops li.lit{color:var(--sand-50)}
+.rd-stops li.lit::before{background:var(--green-500);border-color:var(--green-500)}
+.rd-stops li:first-child{translate:0 0;align-items:flex-start}.rd-stops li:first-child::before{margin-left:0}
+.rd-stops li:last-child{translate:-100% 0;align-items:flex-end}
+.rd-truck{position:absolute;left:0;top:-3px;width:76px;z-index:2;will-change:transform}
+.rd-truck svg{display:block;width:100%;overflow:visible}
+.rd-truck .wh{transform-box:fill-box;transform-origin:center}
+@media (max-width:860px){
+  .jr{height:auto}
+  .jr-pin{position:relative;height:auto;padding:var(--section) 0}
+  .jr-meta .jr-ctr,.jr-media,.jr-road{display:none}
+  .jr-stage{display:block}
+  .jr-copy{display:grid;gap:56px}
+  .jr-step{position:relative;inset:auto;pointer-events:auto}
+  .jr-step>*{opacity:1;transform:none;filter:none}
+  .jr-step h3{font-size:44px}
+  .jr-mimg{display:block;order:-1;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px}
+}
 
 /* ---------- 05 band: frame opens to full bleed ---------- */
 .band{position:relative;height:96vh;min-height:560px;overflow:hidden;background:var(--navy-950)}
@@ -459,10 +505,6 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .waybill{left:auto;right:0;bottom:-28px;width:min(280px,78%)}
   .wb-stamp{right:-6px}
   .ab-fig{margin-bottom:28px}
-  .story{grid-template-columns:28px minmax(0,1fr)}
-  .smedia{display:none}
-  .sstep{min-height:auto;padding:0 0 56px;opacity:1}
-  .sstep .mimg{display:block;margin-top:22px;aspect-ratio:16/10;border-radius:14px}
   .vals{flex-direction:column;height:auto}
   .val{flex:none;height:300px}
   .val img{filter:none;transform:none}
@@ -504,17 +546,18 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
 /* ambient drift: uses individual translate/scale so it layers over existing transform-based reveals/hovers */
 @keyframes driftA{0%,100%{translate:0 0;scale:1.06}50%{translate:-1.6% -1.2%;scale:1.1}}
 @keyframes driftB{0%,100%{translate:0 0;scale:1.08}50%{translate:1.4% 1%;scale:1.05}}
-.media img,.smedia img,.val img,.band .bg{animation:driftA 22s ease-in-out infinite}
-.bay:nth-child(even) .media img,.sstep:nth-child(even) .mimg img,.smedia img:nth-child(even),.val:nth-child(even) img{animation-name:driftB;animation-duration:26s}
-.bay:nth-child(2) .media img,.val:nth-child(3) img,.smedia img:nth-child(3){animation-delay:-9s}
-.bay:nth-child(3) .media img,.val:nth-child(4) img,.smedia img:nth-child(4){animation-delay:-15s}
+.media img,.jr-media img,.val img,.band .bg{animation:driftA 22s ease-in-out infinite}
+.bay:nth-child(even) .media img,.jr-media img:nth-child(even),.val:nth-child(even) img{animation-name:driftB;animation-duration:26s}
+.bay:nth-child(2) .media img,.val:nth-child(3) img,.jr-media img:nth-child(3){animation-delay:-9s}
+.bay:nth-child(3) .media img,.val:nth-child(4) img,.jr-media img:nth-child(4){animation-delay:-15s}
 .band .bg{animation-duration:30s}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .grain{animation:none}
   .ab-frame{clip-path:none!important;transition:none}.waybill{transition:none}.wb-stamp{transition:none}.shutter,.bay-info{transition:none!important;animation:none!important}.sh-hint i{animation:none}.pulse::after{animation:none}
-  .media img,.smedia img,.val img,.band .bg{animation:none}
-  [data-r],.li,.media img,.band h2 .ch,.wordmark .wl,.statement .w,.smedia img,.val,.val img,.val p{transition:none!important;opacity:1;transform:none!important;filter:none}
+  .media img,.jr-media img,.val img,.band .bg{animation:none}
+  .jr-media img,.jr-step>*{transition:none!important}.ctr-n.roll{animation:none}
+  [data-r],.li,.media img,.band h2 .ch,.wordmark .wl,.statement .w,.val,.val img,.val p{transition:none!important;opacity:1;transform:none!important;filter:none}
   .band .frame{clip-path:none!important}.band .bg{transform:none!important}
 }
 </style>
@@ -670,29 +713,64 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   </section>
 
   <!-- 04 · How it works: told on scroll -->
-  <section class="block on-night seam" id="how" aria-labelledby="howT">
+  <section class="block on-night seam how" id="how" aria-labelledby="howT">
     <div class="grid-bg" aria-hidden="true"></div>
-    <div class="wrap"><div class="inner">
-      <div class="head-row">
-        <div><div class="eyebrow" data-r><b data-dec>03</b><i></i><span data-dec>How it works</span></div><h2 class="title" id="howT" data-split>Four steps, door to door.</h2></div>
-        <p class="body" data-r>You book once. We take it from there and keep you informed.</p>
+    <div class="jr" id="journey">
+      <div class="jr-pin">
+        <div class="wrap"><div class="inner jr-inner">
+          <div class="jr-head">
+            <div><div class="eyebrow" data-r><b data-dec>03</b><i></i><span data-dec>How it works</span></div><h2 class="title" id="howT" data-split>Four steps, door to door.</h2></div>
+            <div class="jr-meta" data-r>
+              <p class="body">You book once. We take it from there and keep you informed.</p>
+              <div class="jr-ctr" aria-hidden="true"><span class="ctr-n" id="ctrN">01</span><span class="ctr-of">/ 04</span></div>
+            </div>
+          </div>
+          <div class="jr-stage">
+            <div class="jr-media" aria-hidden="true">
+              <img src="img/trails.jpg" alt="" class="on"><img src="img/windows.jpg" alt=""><img src="img/headlights.jpg" alt=""><img src="img/door.jpg" alt="">
+              <div class="shade"></div><span class="ticks"><i></i></span>
+              <span class="jr-stop" id="jrStop">Stop 01 · Book</span>
+            </div>
+            <ol class="jr-copy" id="jrCopy">
+              <li class="jr-step on">
+                <span class="jr-status"><i></i>Status · Booked</span>
+                <h3>Book <em>once.</em></h3>
+                <p>Tell us what’s moving, from where, to where.</p>
+                <ul class="jr-facts"><li>What’s moving</li><li>Pickup and drop-off</li><li>Your contact details</li></ul>
+                <img class="jr-mimg" src="img/trails.jpg" alt="Traffic light trails at dusk in Fourways, Johannesburg">
+              </li>
+              <li class="jr-step">
+                <span class="jr-status"><i></i>Status · Collected</span>
+                <h3>Collect <em>&amp; sort.</em></h3>
+                <p>We pick it up and bring it in to be sorted.</p>
+                <ul class="jr-facts"><li>Picked up from you</li><li>Sorted at the depot</li></ul>
+                <img class="jr-mimg" src="img/windows.jpg" alt="Industrial windows lit warm gold at night">
+              </li>
+              <li class="jr-step">
+                <span class="jr-status"><i></i>Status · In transit</span>
+                <h3>Move <em>day or night.</em></h3>
+                <p>It travels with us, day or night, and you can track it.</p>
+                <ul class="jr-facts"><li>On the road with us</li><li>Trackable by reference</li></ul>
+                <img class="jr-mimg" src="img/headlights.jpg" alt="Truck headlights through fog at night">
+              </li>
+              <li class="jr-step">
+                <span class="jr-status"><i></i>Status · Delivered</span>
+                <h3>Deliver <em>to the door.</em></h3>
+                <p>Handed over at the door, and marked delivered.</p>
+                <ul class="jr-facts"><li>Handed over in person</li><li>Marked delivered</li></ul>
+                <a class="btn primary" href="#contact">Book a delivery <svg aria-hidden="true"><use href="#arr"/></svg></a>
+                <img class="jr-mimg" src="img/door.jpg" alt="A house at night with its front door lit">
+              </li>
+            </ol>
+          </div>
+          <div class="jr-road" id="jrRoad" aria-hidden="true">
+            <div class="rd-band"><span class="rd-dash" id="rdDash"></span><span class="rd-fill" id="rdFill"></span></div>
+            <ol class="rd-stops"><li style="--x:0"><b>01</b>Book</li><li style="--x:1"><b>02</b>Collect</li><li style="--x:2"><b>03</b>Move</li><li style="--x:3"><b>04</b>Deliver</li></ol>
+            <div class="rd-truck" id="rdTruck"><svg viewBox="0 0 64 34"><rect x="2" y="5" width="36" height="18" rx="2" fill="#F5EFE6"/><rect x="2" y="17" width="36" height="2.4" fill="#2FBF71"/><path d="M39 10h11.5l8.5 7.5V23H39z" fill="#D9CCB8"/><path d="M42 12.5h8l5.2 5H42z" fill="#0A2540"/><rect x="2" y="23" width="57" height="3" rx="1" fill="#24476d"/><circle cx="57.5" cy="20" r="1.2" fill="#E9A866"/><g class="wh"><circle cx="14" cy="28" r="4.6" fill="#071A2E" stroke="#F5EFE6" stroke-width="1.6"/><path d="M14 24.6v6.8M10.6 28h6.8" stroke="#F5EFE6" stroke-width="1"/></g><g class="wh"><circle cx="48" cy="28" r="4.6" fill="#071A2E" stroke="#F5EFE6" stroke-width="1.6"/><path d="M48 24.6v6.8M44.6 28h6.8" stroke="#F5EFE6" stroke-width="1"/></g></svg></div>
+          </div>
+        </div></div>
       </div>
-      <div class="story" id="story">
-        <div class="rail" aria-hidden="true"><span class="track"></span><span class="beam" id="beam"></span></div>
-        <ol class="ssteps" id="ssteps">
-          <li class="sstep"><span class="num">01 / 04</span><h3>Book</h3><p>Tell us what’s moving, from where, to where.</p><div class="media mimg" data-m><img src="img/trails.jpg" alt="Traffic light trails at dusk in Fourways, Johannesburg"></div></li>
-          <li class="sstep"><span class="num">02 / 04</span><h3>Collect</h3><p>We pick it up and bring it in to be sorted.</p><div class="media mimg" data-m><img src="img/windows.jpg" alt="Industrial windows lit warm gold at night"></div></li>
-          <li class="sstep"><span class="num">03 / 04</span><h3>Move</h3><p>It travels with us, day or night, and you can track it.</p><div class="media mimg" data-m><img src="img/headlights.jpg" alt="Truck headlights through fog at night"></div></li>
-          <li class="sstep"><span class="num">04 / 04</span><h3>Deliver</h3><p>Handed over at the door, and marked delivered.</p><div class="media mimg" data-m><img src="img/door.jpg" alt="A house at night with its front door lit"></div></li>
-        </ol>
-        <div class="smedia" id="smedia" aria-hidden="true">
-          <img src="img/trails.jpg" alt="" class="on"><img src="img/windows.jpg" alt=""><img src="img/headlights.jpg" alt=""><img src="img/door.jpg" alt="">
-          <div class="shade"></div><span class="ticks"><i></i></span>
-          <div class="hud"><div>Step<b id="hudName">Book</b></div><span class="big" id="hudNum">01</span></div>
-        </div>
-      </div>
-      <div class="story-end" data-r><span class="eyebrow" style="margin:0">Ready when you are</span><a class="btn primary" href="#contact">Book a delivery <svg aria-hidden="true"><use href="#arr"/></svg></a></div>
-    </div></div>
+    </div>
   </section>
 
   <!-- 05 · Band: the frame opens to full bleed -->
@@ -1026,27 +1104,35 @@ function abFrame(now) {
   abTrack.style.transform = `translate3d(${mqX.toFixed(2)}px,0,0)`;
 }
 
-/* ================= How it works: told on scroll (Aceternity timeline beam + sticky media) ================= */
-const story = $('#story'), beam = $('#beam'), steps = $$('.sstep'), smImgs = $$('#smedia img'), hudName = $('#hudName'), hudNum = $('#hudNum');
-const rail = $('.rail', story);
-const nodes = steps.map(() => { const n = document.createElement('span'); n.className = 'node'; rail.append(n); return n; });
-function placeNodes() { const sr = story.getBoundingClientRect(); steps.forEach((s, i) => { const r = s.getBoundingClientRect(); const h3 = $('h3', s).getBoundingClientRect(); nodes[i].style.top = (h3.top - sr.top + h3.height / 2 - 6) + 'px'; nodes[i]._y = h3.top - sr.top + h3.height / 2; void r; }); }
-let actI = -1;
+/* ================= How it works: a pinned journey. scroll drives the truck; it dwells at each stop ================= */
+const journey = $('#journey'), jrSteps = $$('.jr-step'), jrImgs = $$('.jr-media img'), jrStop = $('#jrStop'), ctrN = $('#ctrN');
+const rdTruck = $('#rdTruck'), rdFill = $('#rdFill'), rdDash = $('#rdDash'), rdStops = $$('.rd-stops li'), rdWheels = $$('.wh', rdTruck), jrRoad = $('#jrRoad');
+const JR_N = jrSteps.length;
+let roadW = 0, truckW = 76, actI = -1;
+function placeNodes() { roadW = jrRoad.clientWidth; truckW = rdTruck.offsetWidth; }
 function storyFrame() {
-  const sr = story.getBoundingClientRect();
-  if (sr.bottom < 0 || sr.top > H) return;
-  const mid = H * 0.5, p = reduce ? 1 : clamp((mid - sr.top) / sr.height);
-  beam.style.transform = `scaleY(${p.toFixed(4)})`;
-  const by = p * sr.height;
-  nodes.forEach((n) => n.classList.toggle('lit', by >= n._y - 2));
-  let best = 0, bd = 1e9;
-  steps.forEach((s, i) => { const r = s.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = i; } });
+  if (!roadW) return;
+  const r = journey.getBoundingClientRect();
+  if (r.bottom < 0 || r.top > H) return;
+  const p = clamp(-r.top / Math.max(1, r.height - H));
+  // dwell: the truck eases between stops and rests at each one
+  const t = p * (JR_N - 1), seg = Math.min(JR_N - 2, Math.floor(t)), f = t - seg;
+  const pos = seg + smooth(0.28, 0.72, f);
+  const x = (pos / (JR_N - 1)) * roadW;
+  rdTruck.style.transform = `translate3d(${(x - truckW * (pos / (JR_N - 1))).toFixed(1)}px,0,0)`;
+  rdFill.style.transform = `scaleX(${(pos / (JR_N - 1)).toFixed(4)})`;
+  rdDash.style.backgroundPosition = `${(-p * 900).toFixed(1)}px 0`;
+  const rot = (x / (Math.PI * 11)) * 360;
+  rdWheels.forEach((w) => { w.style.transform = `rotate(${rot.toFixed(1)}deg)`; });
+  const best = Math.round(pos);
+  rdStops.forEach((s, i) => s.classList.toggle('lit', i <= pos + 0.02));
   if (best !== actI) {
     actI = best;
-    steps.forEach((s, i) => s.classList.toggle('act', i === best));
-    smImgs.forEach((im, i) => im.classList.toggle('on', i === best));
-    hudName.textContent = $('h3', steps[best]).textContent;
-    hudNum.textContent = String(best + 1).padStart(2, '0');
+    jrSteps.forEach((s, i) => s.classList.toggle('on', i === best));
+    jrImgs.forEach((im, i) => im.classList.toggle('on', i <= best));
+    jrStop.textContent = `Stop ${String(best + 1).padStart(2, '0')} · ${$('h3', jrSteps[best]).firstChild.textContent.trim()}`;
+    ctrN.textContent = String(best + 1).padStart(2, '0');
+    ctrN.classList.remove('roll'); void ctrN.offsetWidth; ctrN.classList.add('roll');
   }
 }
 
