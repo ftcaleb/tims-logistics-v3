@@ -193,18 +193,6 @@ section.block.intro{--wipe:cubic-bezier(.645,.045,.355,1);--expo:cubic-bezier(.1
 .ab-idx a:hover .t,.ab-idx a:focus-visible .t{transform:translateX(10px)}
 .ab-idx svg{width:16px;height:16px;transform:translateX(-6px);opacity:.5;transition:transform .55s var(--expo),opacity .3s}
 .ab-idx a:hover svg,.ab-idx a:focus-visible svg{transform:none;opacity:1}
-/* row preview: follows the cursor, its own little shutter rolls up */
-.ab-peek{position:fixed;left:0;top:0;z-index:20;width:260px;aspect-ratio:16/11;pointer-events:none;border-radius:5px;overflow:hidden;background:var(--navy-900);
-  box-shadow:0 0 0 1px rgba(7,26,46,.12),0 30px 60px -20px rgba(7,26,46,.55);opacity:0;scale:.86;transition:opacity .35s ease,scale .7s cubic-bezier(.19,1,.22,1)}
-.ab-peek.on{opacity:1;scale:1}
-.ab-peek img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;scale:1.15;transition:opacity .45s ease,scale 1.4s cubic-bezier(.19,1,.22,1)}
-.ab-peek img.cur{opacity:1;scale:1}
-.pk-shutter{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 18%,transparent 82%,rgba(0,0,0,.25)),repeating-linear-gradient(180deg,#0d2a47 0 9px,#061627 9px 10px,#1a3a5c 10px 11px,#0d2a47 11px 12px);
-  transform:none;transition:transform 1.1s cubic-bezier(.45,0,.12,1) .08s}
-.pk-shutter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:linear-gradient(#24476d,#071a2e)}
-.ab-peek.on .pk-shutter{transform:translateY(calc(-100% + 6px))}
-.pk-tag{position:absolute;left:12px;bottom:10px;z-index:2;font:500 11px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-50);text-shadow:0 1px 8px rgba(0,0,0,.5)}
-@media (hover:none){.ab-peek{display:none}}
 /* photo: darkroom curtain wipe + inner parallax + progressive blur caption */
 .ab-fig{grid-column:8/span 5;margin:0;position:relative;display:flex;min-height:0}
 .ab-frame{flex:1;min-height:360px;border-radius:4px;clip-path:inset(100% 0 0 0);transition:clip-path 1.3s var(--wipe)}
@@ -622,9 +610,9 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
             </div>
           </div>
           <ol class="ab-idx" data-r style="--i:1" aria-label="Services">
-            <li><a href="#services" data-pk="0"><span class="n">01</span><span class="t">Logistics</span><span class="k">Full load</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
-            <li><a href="#services" data-pk="1"><span class="n">02</span><span class="t">Package delivery</span><span class="k">Parcel</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
-            <li><a href="#services" data-pk="2"><span class="n">03</span><span class="t">Product delivery</span><span class="k">Pallet</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+            <li><a href="#services"><span class="n">01</span><span class="t">Logistics</span><span class="k">Full load</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+            <li><a href="#services"><span class="n">02</span><span class="t">Package delivery</span><span class="k">Parcel</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+            <li><a href="#services"><span class="n">03</span><span class="t">Product delivery</span><span class="k">Pallet</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
           </ol>
         </div>
         <figure class="ab-fig" data-r>
@@ -644,7 +632,6 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
         </figure>
       </div>
     </div></div>
-    <div class="ab-peek" id="abPeek" aria-hidden="true"><img src="img/depot.jpg" alt=""><img src="img/warehouse.jpg" alt=""><img src="img/jacaranda.jpg" alt=""><div class="pk-shutter"></div><span class="pk-tag" id="pkTag"></span></div>
     <div class="ab-mq" aria-hidden="true"><div class="ab-track" id="abTrack">
       <span class="g"><b>Safe</b><i class="d"></i><em>Reliable</em><i class="d"></i><b>Efficient</b><i class="d"></i><em>Professional</em><i class="d"></i><b>Safe</b><i class="d"></i><em>Reliable</em><i class="d"></i><b>Efficient</b><i class="d"></i><em>Professional</em><i class="d"></i></span>
       <span class="g"><b>Safe</b><i class="d"></i><em>Reliable</em><i class="d"></i><b>Efficient</b><i class="d"></i><em>Professional</em><i class="d"></i><b>Safe</b><i class="d"></i><em>Reliable</em><i class="d"></i><b>Efficient</b><i class="d"></i><em>Professional</em><i class="d"></i></span>
@@ -1019,28 +1006,6 @@ new IntersectionObserver(([e], o) => {
   wbSteps.forEach((li, i) => setTimeout(() => li.classList.add('on'), t0 + i * gap));
   setTimeout(() => waybill.classList.add('stamped'), t0 + wbSteps.length * gap + (reduce ? 0 : 200));
 }, { threshold: 0.6 }).observe(waybill);
-const peek = $('#abPeek'), pkImgs = $$('img', peek), pkTag = $('#pkTag');
-const pk = { x: 0, y: 0, tx: 0, ty: 0, on: false, r: 0 };
-if (FINE && !reduce) {
-  const rows = $$('.ab-idx [data-pk]');
-  rows.forEach((a) => a.addEventListener('pointerenter', (e) => {
-    const i = +a.dataset.pk;
-    pkImgs.forEach((im, k) => im.classList.toggle('cur', k === i));
-    pkTag.textContent = $('.t', a).textContent;
-    if (!pk.on) { pk.x = pk.tx = e.clientX; pk.y = pk.ty = e.clientY; }
-    pk.on = true; peek.classList.add('on');
-  }));
-  $('.ab-idx').addEventListener('pointermove', (e) => { pk.tx = e.clientX; pk.ty = e.clientY; });
-  $('.ab-idx').addEventListener('pointerleave', () => { pk.on = false; peek.classList.remove('on'); });
-  addEventListener('scroll', () => { if (pk.on) { pk.on = false; peek.classList.remove('on'); } }, { passive: true });
-}
-function peekFrame() {
-  if (!pk.on && !peek.classList.contains('on') && Math.abs(pk.tx - pk.x) < 0.5) return;
-  const dx = pk.tx - pk.x;
-  pk.x += dx * 0.14; pk.y += (pk.ty - pk.y) * 0.14;
-  pk.r += (clamp(dx * 0.06, -6, 6) - pk.r) * 0.12;
-  peek.style.transform = `translate3d(${(pk.x + 28).toFixed(1)}px,${(pk.y - 205).toFixed(1)}px,0) rotate(${pk.r.toFixed(2)}deg)`;
-}
 const abPar = $('#abPar'), abFrameEl = abPar.parentElement, abTrack = $('#abTrack');
 let mqX = 0, mqLast = 0, mqDir = -1;
 function abFrame(now) {
@@ -1278,7 +1243,7 @@ new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { 
 (() => { const c = document.createElement('canvas'); c.width = c.height = 140; const x = c.getContext('2d'), d = x.createImageData(140, 140); for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } x.putImageData(d, 0, 0); $('#grain').style.backgroundImage = `url(${c.toDataURL()})`; })();
 
 /* ================= loop + boot ================= */
-function frame(now) { if (lenis) lenis.raf(now); heroFrame(); abFrame(now); peekFrame(); headerFrame(); aboutFrame(); storyFrame(); bandFrameF(); mapFrame(now); requestAnimationFrame(frame); }
+function frame(now) { if (lenis) lenis.raf(now); heroFrame(); abFrame(now); headerFrame(); aboutFrame(); storyFrame(); bandFrameF(); mapFrame(now); requestAnimationFrame(frame); }
 function relayout() { W = innerWidth; H = innerHeight; layout(); sizeMap(); placeNodes(); fitWordmark(); $$('[data-split]').forEach((el) => { splitLines(el); }); }
 const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 2500))]);
 layout();
