@@ -359,16 +359,50 @@ section.block.how{padding:0}
   .jr-mimg{display:block;order:-1;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px}
 }
 
-/* ---------- 05 band: frame opens to full bleed ---------- */
-.band{position:relative;height:96vh;min-height:560px;overflow:hidden;background:var(--navy-950)}
-.band .frame{position:absolute;inset:0;clip-path:inset(12% 14% 12% 14% round 24px);will-change:clip-path}
+/* ---------- 05 band: pinned. the frame opens, then the city's lights come on from the ground up ---------- */
+.band{position:relative;background:var(--navy-950)}
+.bd-track{position:relative;height:260vh}
+.bd-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.band .frame{position:absolute;inset:0;clip-path:inset(12% 14% 12% 14% round 24px);will-change:clip-path;background:#04101d}
 .band .bg{position:absolute;inset:-6% 0;background:url(img/jhb.jpg) center 55%/cover no-repeat;transform:scale(1.3);will-change:transform}
-.band .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgb(7 26 46/.1) 0%,rgb(7 26 46/.2) 45%,rgb(7 26 46/.85) 100%)}
-.band .copy{position:absolute;left:var(--gl);right:var(--gr);bottom:clamp(40px,8vh,96px);display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;z-index:2}
-.band h2{font-weight:600;font-size:clamp(36px,5.4vw,84px);line-height:1;letter-spacing:-.03em;max-width:14ch}
-.band h2 .ch{display:inline-block;opacity:0;transform:translateY(.5em);color:var(--amber-400);transition:opacity .6s var(--E),transform .8s var(--E),color .9s ease .35s}
-.band h2.in .ch{opacity:1;transform:none;color:var(--sand-50)}
-.band .credit{font:500 11px/1.4 var(--font-data);letter-spacing:.1em;text-transform:uppercase;color:var(--sand-60)}
+.band .bg.dark{--r:0%;filter:grayscale(1) brightness(.3) contrast(1.15);
+  -webkit-mask-image:radial-gradient(140% 120% at 50% 115%,transparent var(--r),#000 calc(var(--r) + 14%));mask-image:radial-gradient(140% 120% at 50% 115%,transparent var(--r),#000 calc(var(--r) + 14%))}
+.band .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgb(7 26 46/.55) 0%,rgb(7 26 46/.05) 30%,rgb(7 26 46/.25) 55%,rgb(7 26 46/.92) 100%)}
+.bd-net{position:absolute;inset:0;width:100%;height:100%}
+.bd-links path{fill:none;stroke:rgba(245,239,230,.55);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
+.bd-nodes circle{fill:var(--navy-950);stroke:var(--sand-50);stroke-width:1.5;opacity:0;transition:opacity .5s}
+.bd-net.nodes .bd-nodes circle{opacity:1}
+.bd-pulses circle{fill:var(--green-500);opacity:0;transition:opacity .8s}
+.bd-net.live .bd-pulses circle{opacity:1}
+.bd-hud{position:absolute;left:var(--gl);right:var(--gr);top:clamp(90px,12vh,112px);z-index:2;display:flex;justify-content:space-between;gap:16px;font:500 12px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-50);font-variant-numeric:tabular-nums;opacity:0;transition:opacity .6s}
+.bd-hud span{display:flex;align-items:center;gap:10px}
+.band.open .bd-hud{opacity:1}
+.band .copy{position:absolute;left:var(--gl);right:var(--gr);bottom:clamp(28px,5vh,56px);z-index:2;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:end;gap:20px 48px}
+.band h2{font-weight:600;font-size:clamp(38px,1rem + 4.6vw,96px);line-height:.98;letter-spacing:-.045em;max-width:12ch;color:var(--sand-50)}
+.band h2 .w{display:inline-block;opacity:.16;transition:none}
+.band h2 em{font:italic 400 1.1em/1 "Instrument Serif",Georgia,serif;letter-spacing:-.015em;color:#f2c58f}
+.bd-caps{list-style:none;margin:0;padding:0;border-top:1px solid rgba(245,239,230,.22)}
+.bd-caps li{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .9s cubic-bezier(.19,1,.22,1)}
+.bd-caps.on li{opacity:1;transform:none}
+.bd-caps.on li:nth-child(2){transition-delay:.1s}.bd-caps.on li:nth-child(3){transition-delay:.2s}
+.bd-caps a{position:relative;isolation:isolate;display:grid;grid-template-columns:36px 1fr auto 18px;align-items:center;gap:14px;padding:15px 14px;border-bottom:1px solid rgba(245,239,230,.22);color:var(--sand-50);text-decoration:none;overflow:hidden}
+.bd-caps a::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(245,239,230,.1);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transform:scaleY(0);transform-origin:bottom;transition:transform .7s cubic-bezier(.45,0,.12,1)}
+.bd-caps a:hover::before,.bd-caps a:focus-visible::before{transform:none}
+.bd-caps a:focus-visible{outline:none}
+.bd-caps .n,.bd-caps .k{font:500 12px/1 var(--font-data);letter-spacing:.1em;text-transform:uppercase;color:var(--sand-300)}
+.bd-caps b{font-size:clamp(18px,.8rem + .5vw,22px);font-weight:600;letter-spacing:-.02em;transition:transform .55s cubic-bezier(.19,1,.22,1)}
+.bd-caps a:hover b,.bd-caps a:focus-visible b{transform:translateX(8px)}
+.bd-caps svg{width:16px;height:16px;transform:translateX(-6px);opacity:.6;transition:transform .55s cubic-bezier(.19,1,.22,1),opacity .3s}
+.bd-caps a:hover svg,.bd-caps a:focus-visible svg{transform:none;opacity:1}
+.band .credit{grid-column:1/-1;justify-self:end;font:500 11px/1.4 var(--font-data);letter-spacing:.1em;text-transform:uppercase;color:var(--sand-60)}
+@media (max-width:860px){
+  .bd-track{height:220vh}
+  .band .copy{grid-template-columns:1fr}
+  .band .credit{justify-self:start}
+  .bd-hud{font-size:11px}
+  .bd-hud span:first-child{display:none}
+}
+@media (max-width:640px){.bd-caps .k{display:none}.bd-caps a{grid-template-columns:32px 1fr 18px}}
 
 /* ---------- 06 network ---------- */
 .network .grid{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,80px);align-items:center}
@@ -509,7 +543,6 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .val{flex:none;height:300px}
   .val img{filter:none;transform:none}
   .val p{max-height:none;opacity:1;margin-top:8px}
-  .band .frame{clip-path:inset(6% 5% 6% 5% round 18px)}
 }
 @media (max-width:640px){
   .mark span{display:none}
@@ -546,11 +579,10 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
 /* ambient drift: uses individual translate/scale so it layers over existing transform-based reveals/hovers */
 @keyframes driftA{0%,100%{translate:0 0;scale:1.06}50%{translate:-1.6% -1.2%;scale:1.1}}
 @keyframes driftB{0%,100%{translate:0 0;scale:1.08}50%{translate:1.4% 1%;scale:1.05}}
-.media img,.jr-media img,.val img,.band .bg{animation:driftA 22s ease-in-out infinite}
+.media img,.jr-media img,.val img{animation:driftA 22s ease-in-out infinite}
 .bay:nth-child(even) .media img,.jr-media img:nth-child(even),.val:nth-child(even) img{animation-name:driftB;animation-duration:26s}
 .bay:nth-child(2) .media img,.val:nth-child(3) img,.jr-media img:nth-child(3){animation-delay:-9s}
 .bay:nth-child(3) .media img,.val:nth-child(4) img,.jr-media img:nth-child(4){animation-delay:-15s}
-.band .bg{animation-duration:30s}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .grain{animation:none}
@@ -558,7 +590,7 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .media img,.jr-media img,.val img,.band .bg{animation:none}
   .jr-media img,.jr-step>*{transition:none!important}.ctr-n.roll{animation:none}
   [data-r],.li,.media img,.band h2 .ch,.wordmark .wl,.statement .w,.val,.val img,.val p{transition:none!important;opacity:1;transform:none!important;filter:none}
-  .band .frame{clip-path:none!important}.band .bg{transform:none!important}
+  .band .frame{clip-path:none!important}.band .bg{transform:none!important}.band .bg.dark{display:none}.bd-track{height:auto}.bd-pin{position:relative}.bd-caps li{opacity:1;transform:none}.band h2 .w{opacity:1!important}.bd-hud{opacity:1}
 }
 </style>
 
@@ -774,11 +806,41 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   </section>
 
   <!-- 05 · Band: the frame opens to full bleed -->
-  <section class="band" id="band" aria-label="Driven by technology, built for growth">
-    <div class="frame" id="bandFrame"><div class="bg" id="bandBg" aria-hidden="true"></div><div class="shade" aria-hidden="true"></div></div>
-    <div class="copy">
-      <h2 id="bandT">Driven by technology, built for growth.</h2>
-      <span class="credit">Johannesburg · Photo · Vije Vijendranath</span>
+  <section class="band" id="band" aria-labelledby="bandT">
+    <div class="bd-track" id="bandTrack">
+      <div class="bd-pin">
+        <div class="frame" id="bandFrame">
+          <div class="bg" id="bandBg" aria-hidden="true"></div>
+          <div class="bg dark" id="bandDark" aria-hidden="true"></div>
+          <svg class="bd-net" id="bandNet" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g class="bd-links">
+              <path pathLength="1" d="M170 430 Q 420 470 640 370"/>
+              <path pathLength="1" d="M640 370 Q 800 230 1010 290"/>
+              <path pathLength="1" d="M1010 290 Q 1220 190 1430 250"/>
+              <path pathLength="1" d="M640 370 Q 760 480 980 470"/>
+              <path pathLength="1" d="M980 470 Q 1180 520 1380 430"/>
+              <path pathLength="1" d="M1010 290 Q 1000 390 980 470"/>
+            </g>
+            <g class="bd-nodes"><circle cx="170" cy="430" r="5"/><circle cx="640" cy="370" r="5"/><circle cx="1010" cy="290" r="5"/><circle cx="1430" cy="250" r="5"/><circle cx="980" cy="470" r="5"/><circle cx="1380" cy="430" r="5"/></g>
+            <g class="bd-pulses">
+              <circle r="3.5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M170 430 Q 420 470 640 370 Q 800 230 1010 290 Q 1220 190 1430 250"/></circle>
+              <circle r="3.5"><animateMotion dur="4.2s" begin="-1.6s" repeatCount="indefinite" path="M640 370 Q 760 480 980 470 Q 1180 520 1380 430"/></circle>
+              <circle r="3"><animateMotion dur="2.6s" begin="-.8s" repeatCount="indefinite" path="M1010 290 Q 1000 390 980 470"/></circle>
+            </g>
+          </svg>
+          <div class="shade" aria-hidden="true"></div>
+        </div>
+        <div class="bd-hud" aria-hidden="true"><span><i class="pulse"></i>Johannesburg · after dark</span><span id="bdPct">City lights 000%</span></div>
+        <div class="copy">
+          <h2 id="bandT">Driven by <em>technology,</em> built for <em>growth.</em></h2>
+          <ul class="bd-caps" id="bdCaps">
+            <li><a href="#contact"><span class="n">01</span><b>Book online</b><span class="k">Three short steps</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+            <li><a href="#track"><span class="n">02</span><b>Track</b><span class="k">By reference</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+            <li><a href="#network"><span class="n">03</span><b>Plan</b><span class="k">Draw your route</span><svg aria-hidden="true"><use href="#arr"/></svg></a></li>
+          </ul>
+          <span class="credit">Photo · Vije Vijendranath</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1136,20 +1198,42 @@ function storyFrame() {
   }
 }
 
-/* ================= Band: the frame opens to full bleed (21st.dev scroll-reveal-image / React Bits ScrollExpand) ================= */
-const band = $('#band'), bandFrame = $('#bandFrame'), bandBg = $('#bandBg'), bandT = $('#bandT');
-(() => { const t = bandT.textContent; bandT.setAttribute('aria-label', t); bandT.innerHTML = t.split(' ').map((w) => `<span style="display:inline-block;white-space:nowrap" aria-hidden="true">${[...w].map((c) => `<span class="ch">${c}</span>`).join('')}</span>`).join(' '); $$('.ch', bandT).forEach((c, i) => (c.style.transitionDelay = `${i * 22}ms, ${i * 22}ms, ${350 + i * 22}ms`)); })();
-const bio2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { bandT.classList.add('in'); bio2.disconnect(); } }), { threshold: 0.6 });
-bio2.observe(bandT);
+/* ================= Band: pinned. frame opens to full bleed, then the city's lights come on, the network draws, the headline lights up ================= */
+const band = $('#band'), bandTrack = $('#bandTrack'), bandFrame = $('#bandFrame'), bandBg = $('#bandBg'), bandDark = $('#bandDark'), bandT = $('#bandT');
+const bandNet = $('#bandNet'), bdLinks = $$('.bd-links path', bandNet), bdPct = $('#bdPct'), bdCaps = $('#bdCaps');
+const bdWords = (() => {
+  bandT.setAttribute('aria-label', bandT.textContent.replace(/\s+/g, ' ').trim());
+  const wrap = (node) => { [...node.childNodes].forEach((c) => {
+    if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach((t) => { if (!t) return; if (/^\s+$/.test(t)) { f.append(' '); return; } const s = document.createElement('span'); s.className = 'w'; s.setAttribute('aria-hidden', 'true'); s.textContent = t; f.append(s); }); c.replaceWith(f); }
+    else if (c.nodeType === 1) wrap(c);
+  }); };
+  wrap(bandT); return $$('.w', bandT);
+})();
+let bdLastPct = -1;
 function bandFrameF() {
-  if (reduce) return;
-  const r = band.getBoundingClientRect();
+  const r = bandTrack.getBoundingClientRect();
   if (r.bottom < 0 || r.top > H) return;
-  const p = smooth(0, 1, clamp((H - r.top) / (H * 0.95)));
-  const small = W < 860, iy = lerp(small ? 6 : 12, 0, p), ix = lerp(small ? 5 : 14, 0, p), rad = lerp(24, 0, p);
+  const open = reduce ? 1 : smooth(0, 1, clamp((H - r.top) / (H * 0.95)));
+  const p = reduce ? 1 : clamp(-r.top / Math.max(1, r.height - H));
+  const small = W < 860, iy = lerp(small ? 6 : 12, 0, open), ix = lerp(small ? 5 : 14, 0, open), rad = lerp(24, 0, open);
   bandFrame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${rad}px)`;
-  const after = clamp((-r.top) / r.height);
-  bandBg.style.transform = `translate3d(0,${(after * 6).toFixed(2)}%,0) scale(${lerp(1.3, 1, p).toFixed(4)})`;
+  const tf = `translate3d(0,${(p * -4).toFixed(2)}%,0) scale(${lerp(1.3, 1.04, open).toFixed(4)})`;
+  bandBg.style.transform = bandDark.style.transform = tf;
+  band.classList.toggle('open', open > 0.98);
+  // lights on, from the ground up
+  const lights = smooth(0.04, 0.62, p);
+  bandDark.style.setProperty('--r', `${(lights * 150 - 14).toFixed(1)}%`);
+  const pct = Math.round(lights * 100);
+  if (pct !== bdLastPct) { bdLastPct = pct; bdPct.textContent = `City lights ${String(pct).padStart(3, '0')}%`; }
+  // network draws link by link
+  const net = smooth(0.22, 0.7, p);
+  bdLinks.forEach((l, i) => { const k = clamp(net * bdLinks.length - i * 0.7); l.style.strokeDashoffset = (1 - k).toFixed(3); });
+  bandNet.classList.toggle('nodes', net > 0.05);
+  bandNet.classList.toggle('live', net > 0.98);
+  // headline lights up word by word
+  const wp = clamp((p - 0.12) / 0.48), n = bdWords.length;
+  bdWords.forEach((w, i) => { w.style.opacity = (0.16 + 0.84 * clamp(wp * (n + 1) - i)).toFixed(3); });
+  bdCaps.classList.toggle('on', p > 0.6);
 }
 
 /* ================= Network: draw my route ================= */
