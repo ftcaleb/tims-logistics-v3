@@ -370,8 +370,6 @@ section.block.how{padding:0}
 .band .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgb(7 26 46/.55) 0%,rgb(7 26 46/.05) 30%,rgb(7 26 46/.25) 55%,rgb(7 26 46/.92) 100%)}
 .bd-net{position:absolute;inset:0;width:100%;height:100%}
 .bd-links path{fill:none;stroke:rgba(245,239,230,.55);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;vector-effect:non-scaling-stroke}
-.bd-nodes circle{fill:var(--navy-950);stroke:var(--sand-50);stroke-width:1.5;opacity:0;transition:opacity .5s}
-.bd-net.nodes .bd-nodes circle{opacity:1}
 .bd-pulses circle{fill:var(--green-500);opacity:0;transition:opacity .8s}
 .bd-net.live .bd-pulses circle{opacity:1}
 .bd-hud{position:absolute;left:var(--gl);right:var(--gr);top:clamp(90px,12vh,112px);z-index:2;display:flex;justify-content:space-between;gap:16px;font:500 12px/1 var(--font-data);letter-spacing:.12em;text-transform:uppercase;color:var(--sand-50);font-variant-numeric:tabular-nums;opacity:0;transition:opacity .6s}
@@ -821,7 +819,6 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
               <path pathLength="1" d="M980 470 Q 1180 520 1380 430"/>
               <path pathLength="1" d="M1010 290 Q 1000 390 980 470"/>
             </g>
-            <g class="bd-nodes"><circle cx="170" cy="430" r="5"/><circle cx="640" cy="370" r="5"/><circle cx="1010" cy="290" r="5"/><circle cx="1430" cy="250" r="5"/><circle cx="980" cy="470" r="5"/><circle cx="1380" cy="430" r="5"/></g>
             <g class="bd-pulses">
               <circle r="3.5"><animateMotion dur="3.4s" repeatCount="indefinite" path="M170 430 Q 420 470 640 370 Q 800 230 1010 290 Q 1220 190 1430 250"/></circle>
               <circle r="3.5"><animateMotion dur="4.2s" begin="-1.6s" repeatCount="indefinite" path="M640 370 Q 760 480 980 470 Q 1180 520 1380 430"/></circle>
@@ -1228,7 +1225,6 @@ function bandFrameF() {
   // network draws link by link
   const net = smooth(0.22, 0.7, p);
   bdLinks.forEach((l, i) => { const k = clamp(net * bdLinks.length - i * 0.7); l.style.strokeDashoffset = (1 - k).toFixed(3); });
-  bandNet.classList.toggle('nodes', net > 0.05);
   bandNet.classList.toggle('live', net > 0.98);
   // headline lights up word by word
   const wp = clamp((p - 0.12) / 0.48), n = bdWords.length;
