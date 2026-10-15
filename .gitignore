@@ -1,3 +1,5 @@
 .vercel
 .graph-indexer
 node_modules
+.impeccable
+.playwright-cli
