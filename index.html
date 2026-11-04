@@ -337,17 +337,6 @@ section.block.how{padding:0}
 .rd-truck{position:absolute;left:0;top:-3px;width:76px;z-index:2;will-change:transform}
 .rd-truck svg{display:block;width:100%;overflow:visible}
 .rd-truck .wh{transform-box:fill-box;transform-origin:center}
-@media (max-width:860px){
-  .jr{height:auto}
-  .jr-pin{position:relative;height:auto;padding:var(--section) 0}
-  .jr-meta .jr-ctr,.jr-media,.jr-road{display:none}
-  .jr-stage{display:block}
-  .jr-copy{display:grid;gap:56px}
-  .jr-step{position:relative;inset:auto;pointer-events:auto}
-  .jr-step>*{opacity:1;transform:none;filter:none}
-  .jr-step h3{font-size:44px}
-  .jr-mimg{display:block;order:-1;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px}
-}
 
 /* ---------- 05 band: pinned. the frame opens, then the city's lights come on from the ground up ---------- */
 .band{position:relative;background:var(--navy-950)}
@@ -381,10 +370,7 @@ section.block.how{padding:0}
 @media (max-width:860px){
   .bd-track{height:220vh}
   .band .copy{grid-template-columns:1fr}
-  .bd-hud{font-size:11px}
-  .bd-hud span:first-child{display:none}
 }
-@media (max-width:640px){.bd-caps .k{display:none}.bd-caps a{grid-template-columns:32px 1fr 18px}}
 
 /* ---------- 06 network ---------- */
 .network .grid{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,80px);align-items:center}
@@ -521,16 +507,12 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .wb-stamp{right:-6px}
   .ab-fig{margin-bottom:28px}
   .vals{flex-direction:column;height:auto}
-  .val{flex:none;height:300px}
-  .val img{filter:none;transform:none}
-  .val p{max-height:none;opacity:1;margin-top:8px}
 }
 @media (max-width:640px){
   .mark span{display:none}
   .btn{padding:12px 14px;font-size:12px}
   .actions .book{display:none}
   .beat{bottom:calc(env(safe-area-inset-bottom,0px) + 76px)}
-  .cue{display:none}
   .tele{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 14px}
   .bays{grid-template-columns:1fr}
   .bay{height:400px}
@@ -542,7 +524,6 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .flaps{gap:1.5px}
   .brow{gap:8px}.brow .lab{width:20px}
   .board{padding:12px}
-  .val{height:260px}
 }
 @media (orientation:landscape) and (max-height:540px){
   .site-head .bar{padding-top:calc(env(safe-area-inset-top,0px) + 10px);padding-bottom:10px}
@@ -556,6 +537,177 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .tele{margin-top:10px}.tele dd{font-size:13px}
   .cue{display:none}
   .road{bottom:calc(env(safe-area-inset-bottom,0px) + 12px)}
+}
+/* ================= mobile architecture. Everything below is scoped to phones, tablets in portrait and short touch screens; desktop never matches ================= */
+@media (max-width:860px),(hover:none) and (pointer:coarse) and (max-height:540px){
+  /* nothing may widen the layout viewport: an overflowing element makes phones lay the page out wider than the screen */
+  main,footer{overflow-x:clip}
+  /* anchors land exactly on a section: its own padding clears the header, and a pinned section pins at once */
+  html{scroll-padding-top:0}
+  a,button,input,select,textarea,label,.val{-webkit-tap-highlight-color:transparent}
+  a,button,.val{touch-action:manipulation}
+  .btn{min-height:44px}
+  .tele dt,.demo,.readout dt,.tprog .lbls{font-size:11px}
+  .tprog .lbls{letter-spacing:.03em}
+  .steps-ind button{min-height:44px;align-content:start;padding-top:6px}
+  .fgrid nav{gap:0}
+  .fgrid nav .h{margin-bottom:6px}
+  .fgrid nav a{display:flex;align-items:center;min-height:44px}
+  .link{min-height:44px;padding-block:12px}
+  .site-head .bar{padding-top:calc(env(safe-area-inset-top,0px) + 12px);padding-bottom:12px}
+  .mark{min-height:44px;min-width:44px}
+  /* hero: road stops are real targets and their labels, hover-only on desktop, are always on */
+  .road button{top:-10px;width:44px;height:44px;margin-left:-22px}
+  .road button::after{left:18px;top:18px}
+  .road button span{bottom:auto;top:34px;opacity:1;font:500 11px/1 var(--font-data);letter-spacing:.04em;color:var(--sand-60);transition:color .3s}
+  .road button.passed span{color:var(--sand-50)}
+  .road button:first-of-type span{left:18px;transform:none}
+  /* how it works: the same pinned journey as desktop, re-stacked for a tall screen */
+  .jr{height:360vh}
+  .jr-pin{position:sticky;height:100svh;padding:calc(env(safe-area-inset-top,0px) + 76px) 0 calc(env(safe-area-inset-bottom,0px) + 8px)}
+  .jr-pin>.wrap{min-height:0}
+  .jr-inner{gap:12px;min-height:0}
+  .jr-head{display:grid;grid-template-columns:1fr auto;align-items:start;gap:6px 16px}
+  .jr-head .eyebrow{margin-bottom:8px}
+  .jr-head .title{font-size:clamp(22px,6.6vw,44px);max-width:none}
+  .jr-meta{display:contents}
+  .jr-meta .body{grid-column:1/-1;grid-row:2;max-width:none;font-size:14px;line-height:1.4}
+  .jr-meta .jr-ctr{display:flex;grid-column:2;grid-row:1}
+  .ctr-n{font-size:clamp(40px,11vw,64px)}
+  .jr-media,.jr-road{display:block}
+  .jr-stage{display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+  .jr-media{flex:1 1 0;min-height:0}
+  .jr-stop{left:34px;bottom:15px;font-size:11px}
+  .jr-copy{display:grid;gap:0;flex:none}
+  .jr-step{grid-area:1/1;position:relative;gap:8px;justify-content:flex-start;pointer-events:none}
+  .jr-step>*{opacity:0;transform:translateY(16px);filter:blur(4px)}
+  .jr-step.on>*{opacity:1;transform:none;filter:none}
+  .jr-step h3{font-size:clamp(26px,8.2vw,52px);line-height:1;letter-spacing:-.04em}
+  .jr-step h3 em{display:inline;font-size:.98em}
+  .jr-step p{font-size:15px;line-height:1.4;max-width:none}
+  .jr-status{padding:8px 10px;margin-bottom:6px;font-size:11px;letter-spacing:.08em}
+  .jr-facts{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;border:0;max-width:none}
+  .jr-facts li{padding:0;border:0;font-size:11px;letter-spacing:.05em;gap:6px}
+  .jr-facts li::before{width:8px}
+  .jr-step .btn{position:absolute;right:0;top:-8px}
+  .jr-mimg{display:none}
+  .jr-road{height:60px;margin:0 2px}
+  .rd-band{top:24px;height:10px}
+  .rd-dash{top:4px}
+  .rd-stops li{top:21px;gap:8px}
+  .rd-stops li::before{width:16px;height:16px}
+  .rd-truck{width:58px;top:-5px}
+}
+/* phones and portrait tablets */
+@media (max-width:860px){
+  .bay-info .top{flex-wrap:wrap;gap:6px 12px}
+  /* 01 about */
+  .ab-live{flex-wrap:wrap;gap:8px 10px}
+  .ab-live .sep{display:none}
+  .ab-live .geo{white-space:nowrap}
+  .wb-stamp{transform:rotate(12deg) scale(1.2)}
+  .ab-idx a:active{color:var(--sand-50)}
+  .ab-idx a:active::before{transform:none}
+  /* band: the three shortcut descriptions stay, stacked under each name */
+  .bd-caps .k{display:block;grid-column:2;grid-row:2;margin-top:4px}
+  .bd-caps a{grid-template-columns:32px 1fr 18px;gap:0 12px;padding:11px 14px}
+  .bd-caps b{grid-column:2;grid-row:1}
+  .bd-caps .n{grid-row:1/3}
+  .bd-caps svg{grid-column:3;grid-row:1/3}
+  .bd-hud span:first-child{display:flex}
+  .bd-hud{font-size:11px;letter-spacing:.06em}
+  /* 05 why: the desktop expanding panels, as an accordion */
+  .val{flex:none;height:92px;transition:height .8s var(--E)}
+  .val.act{height:clamp(280px,46svh,380px)}
+  .val img{filter:saturate(.55) brightness(.62);transform:scale(1.06)}
+  .val.act img{filter:none;transform:scale(1)}
+  .val .cap{bottom:18px}
+  .val h3{margin-top:6px}
+  .val p{max-height:0;opacity:0;margin-top:0}
+  .val.act p{max-height:80px;opacity:1;margin-top:8px}
+}
+@media (max-width:640px){
+  .beat{bottom:calc(env(safe-area-inset-bottom,0px) + 92px)}
+  .road{bottom:calc(env(safe-area-inset-bottom,0px) + 48px)}
+  .chip{padding:8px;letter-spacing:.02em}
+  .chip.on::before{margin-right:6px}
+  .values-line{gap:6px 9px;letter-spacing:.09em}
+  .beat .row{gap:6px}
+  .beat .btn{padding:12px 14px}
+  .cue{display:block;left:var(--gl);right:var(--gr);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);font-size:11px;letter-spacing:.12em;text-align:center}
+  .cell{width:min(11px,calc((100vw - 2*var(--gutter) - 86px)/22))}
+}
+@media (min-width:360px) and (max-width:640px){
+  .mark span{display:inline;font-size:11px;letter-spacing:.16em}
+}
+/* short phones in portrait: the journey keeps every feature but gives its photo room */
+@media (max-width:640px) and (max-height:620px) and (orientation:portrait){
+  .jr-meta .body{display:none}
+  .jr-pin{padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+  .jr-inner,.jr-stage{gap:8px}
+  .jr-step{gap:6px}
+  .jr-step p{font-size:14px}
+  .jr-step .btn{padding:8px 10px;font-size:11px;letter-spacing:.02em}
+  .jr-step .btn svg{display:none}
+  .jr-status{letter-spacing:.04em}
+  .beat h2{font-size:26px}
+  .beat .lede{font-size:15px;margin-bottom:14px}
+}
+/* phones on their side: photo beside the copy, road underneath */
+@media (hover:none) and (pointer:coarse) and (max-height:540px) and (orientation:landscape){
+  .road{bottom:calc(env(safe-area-inset-bottom,0px) + 26px)}
+  .beat{bottom:calc(env(safe-area-inset-bottom,0px) + 58px)}
+  .chip{padding:8px;font-size:11px}
+  .jr-pin{padding:calc(env(safe-area-inset-top,0px) + 62px) 0 calc(env(safe-area-inset-bottom,0px) + 4px)}
+  .jr-inner{gap:6px}
+  .jr-head{grid-template-columns:auto 1fr auto;align-items:center;gap:0 16px}
+  .jr-head>div:first-child{display:flex;align-items:center;gap:14px}
+  .jr-head .eyebrow{margin:0;white-space:nowrap}
+  .jr-head .title{font-size:20px;white-space:nowrap}
+  .jr-meta .body{grid-column:2;grid-row:1;font-size:12px;line-height:1.25;max-width:34ch;justify-self:end}
+  .jr-meta .jr-ctr{grid-column:3}
+  .ctr-n{font-size:30px}
+  .jr-stage{flex-direction:row;gap:16px}
+  .jr-media{flex:1 1 48%}
+  .jr-copy{flex:1 1 52%;align-self:center}
+  .jr-step{gap:5px}
+  .jr-step h3{font-size:26px}
+  .jr-step p{font-size:13px;line-height:1.3}
+  .jr-step .btn{top:-6px}
+  .jr-road{height:52px}
+  .rd-band{top:20px}
+  .rd-stops li{top:17px;gap:4px}
+  .rd-truck{top:-9px}
+  .bd-pin{min-height:0}
+  .band h2{font-size:30px}
+  .band .copy{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 24px;bottom:12px}
+  .bd-caps a{padding-block:5px;min-height:44px}
+  .bd-hud{top:60px}
+}
+/* phones on their side: the accordion fits the short screen, or side-by-side panels do where they still have the width */
+@media (hover:none) and (pointer:coarse) and (max-height:540px) and (orientation:landscape) and (max-width:860px){
+  .val.act{height:min(240px,62svh)}
+}
+@media (hover:none) and (pointer:coarse) and (max-height:540px) and (orientation:landscape) and (min-width:861px){
+  .vals{height:calc(100svh - 88px);min-height:220px}
+}
+/* services on touch: the door is tied to the thumb, so the scroll itself lifts it */
+.bay.scrub .shutter{transition:none;animation:none;will-change:transform}
+.bay.scrub .bay-info{opacity:0;transform:translateY(18px);transition:opacity .4s ease,transform .7s var(--E);transition-delay:0s}
+.bay.scrub.open .bay-info{opacity:1;transform:none}
+.bay.scrub .media.in img{transform:scale(1.12);filter:contrast(1.06) saturate(.85) brightness(.75);transition:transform 1.6s cubic-bezier(.19,1,.22,1),filter 1.2s ease}
+.bay.scrub.open .media.in img{transform:scale(1);filter:contrast(1.06) saturate(.85) brightness(1)}
+/* visitors who ask for less motion get the journey as a plain, complete list */
+@media (max-width:860px) and (prefers-reduced-motion:reduce){
+  .jr{height:auto}
+  .jr-pin{position:relative;height:auto;padding:var(--section) 0}
+  .jr-meta .jr-ctr,.jr-media,.jr-road{display:none}
+  .jr-stage{display:block}
+  .jr-copy{display:grid;gap:56px}
+  .jr-step{grid-area:auto;position:relative;pointer-events:auto;gap:14px}
+  .jr-step>*{opacity:1;transform:none;filter:none}
+  .jr-step .btn{position:static;align-self:flex-start}
+  .jr-mimg{display:block;order:-1;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px}
 }
 /* ambient drift: uses individual translate/scale so it layers over existing transform-based reveals/hovers */
 @keyframes driftA{0%,100%{translate:0 0;scale:1.06}50%{translate:-1.6% -1.2%;scale:1.1}}
@@ -672,7 +824,7 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
         </div>
         <figure class="ab-fig" data-r>
           <div class="media glare ab-frame in">
-            <div class="par" id="abPar"><img src="img/ponte.jpg" alt="Looking up the lit core of Ponte City, Johannesburg, at night"></div>
+            <div class="par" id="abPar"><img src="img/ponte.jpg" srcset="img/m/ponte.jpg 900w, img/ponte.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Looking up the lit core of Ponte City, Johannesburg, at night"></div>
             <div class="pblur" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             <span class="ticks"><i></i></span>
             <figcaption class="ab-incap"><span>Johannesburg, after dark</span></figcaption>
@@ -699,19 +851,19 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
       </div>
       <div class="bays" id="cards">
         <article class="bay" data-r style="--i:0">
-          <div class="media" data-m><img src="img/depot.jpg" alt="Trucks at a loading dock at night under wall lights"></div>
+          <div class="media" data-m><img src="img/depot.jpg" srcset="img/m/depot.jpg 900w, img/depot.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Trucks at a loading dock at night under wall lights"></div>
           <div class="bay-shade"></div>
           <div class="bay-info"><div class="top"><span>Bay 01</span><span>Load · Full load</span></div><h3>Logistics</h3><p>Planned, collected and moved from depot to destination, with one point of contact.</p><a class="link" href="#contact" data-svc="Logistics">Book this service <svg aria-hidden="true"><use href="#arr"/></svg></a></div>
           <div class="shutter" aria-hidden="true"><div class="sh-plate"><span>Bay</span><b>01</b></div><div class="sh-name"><span class="k">Load · Full load</span><b>Logistics</b></div><span class="sh-hint"><i></i>Lift</span><span class="sh-handle"></span></div>
         </article>
         <article class="bay" data-r style="--i:1">
-          <div class="media" data-m><img src="img/warehouse.jpg" alt="A bright, empty warehouse with tall grid windows"></div>
+          <div class="media" data-m><img src="img/warehouse.jpg" srcset="img/m/warehouse.jpg 900w, img/warehouse.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="A bright, empty warehouse with tall grid windows"></div>
           <div class="bay-shade"></div>
           <div class="bay-info"><div class="top"><span>Bay 02</span><span>Load · Parcel</span></div><h3>Package delivery</h3><p>Parcels collected, sorted at the depot and delivered to the door.</p><a class="link" href="#contact" data-svc="Package delivery">Book this service <svg aria-hidden="true"><use href="#arr"/></svg></a></div>
           <div class="shutter" aria-hidden="true"><div class="sh-plate"><span>Bay</span><b>02</b></div><div class="sh-name"><span class="k">Load · Parcel</span><b>Package delivery</b></div><span class="sh-hint"><i></i>Lift</span><span class="sh-handle"></span></div>
         </article>
         <article class="bay" data-r style="--i:2">
-          <div class="media" data-m><img src="img/jacaranda.jpg" alt="A suburban street under purple jacaranda trees at dusk"></div>
+          <div class="media" data-m><img src="img/jacaranda.jpg" srcset="img/m/jacaranda.jpg 900w, img/jacaranda.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="A suburban street under purple jacaranda trees at dusk"></div>
           <div class="bay-shade"></div>
           <div class="bay-info"><div class="top"><span>Bay 03</span><span>Load · Pallet</span></div><h3>Product delivery</h3><p>Stock moved for businesses, from your premises to your customers, on schedule.</p><a class="link" href="#contact" data-svc="Product delivery">Book this service <svg aria-hidden="true"><use href="#arr"/></svg></a></div>
           <div class="shutter" aria-hidden="true"><div class="sh-plate"><span>Bay</span><b>03</b></div><div class="sh-name"><span class="k">Load · Pallet</span><b>Product delivery</b></div><span class="sh-hint"><i></i>Lift</span><span class="sh-handle"></span></div>
@@ -735,7 +887,7 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
           </div>
           <div class="jr-stage">
             <div class="jr-media" aria-hidden="true">
-              <img src="img/book.jpg" alt="" class="on"><img src="img/windows.jpg" alt=""><img src="img/headlights.jpg" alt=""><img src="img/door.jpg" alt="">
+              <img src="img/book.jpg" srcset="img/m/book.jpg 900w, img/book.jpg 1600w" sizes="(max-width:500px) 50vw, 100vw" alt="" class="on"><img src="img/windows.jpg" srcset="img/m/windows.jpg 900w, img/windows.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt=""><img src="img/headlights.jpg" srcset="img/m/headlights.jpg 900w, img/headlights.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt=""><img src="img/door.jpg" srcset="img/m/door.jpg 900w, img/door.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="">
               <div class="shade"></div><span class="ticks"><i></i></span>
               <span class="jr-stop" id="jrStop">Stop 01 · Book</span>
             </div>
@@ -745,21 +897,21 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
                 <h3>Book <em>once.</em></h3>
                 <p>Tell us what’s moving, from where, to where.</p>
                 <ul class="jr-facts"><li>What’s moving</li><li>Pickup and drop-off</li><li>Your contact details</li></ul>
-                <img class="jr-mimg" src="img/book.jpg" alt="Hands typing on a laptop under a warm desk lamp at night">
+                <img class="jr-mimg" src="img/book.jpg" srcset="img/m/book.jpg 900w, img/book.jpg 1600w" sizes="(max-width:500px) 50vw, 100vw" alt="Hands typing on a laptop under a warm desk lamp at night">
               </li>
               <li class="jr-step">
                 <span class="jr-status"><i></i>Status · Collected</span>
                 <h3>Collect <em>&amp; sort.</em></h3>
                 <p>We pick it up and bring it in to be sorted.</p>
                 <ul class="jr-facts"><li>Picked up from you</li><li>Sorted at the depot</li></ul>
-                <img class="jr-mimg" src="img/windows.jpg" alt="Industrial windows lit warm gold at night">
+                <img class="jr-mimg" src="img/windows.jpg" srcset="img/m/windows.jpg 900w, img/windows.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Industrial windows lit warm gold at night">
               </li>
               <li class="jr-step">
                 <span class="jr-status"><i></i>Status · In transit</span>
                 <h3>Move <em>day or night.</em></h3>
                 <p>It travels with us, day or night, and you can track it.</p>
                 <ul class="jr-facts"><li>On the road with us</li><li>Trackable by reference</li></ul>
-                <img class="jr-mimg" src="img/headlights.jpg" alt="Truck headlights through fog at night">
+                <img class="jr-mimg" src="img/headlights.jpg" srcset="img/m/headlights.jpg 900w, img/headlights.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Truck headlights through fog at night">
               </li>
               <li class="jr-step">
                 <span class="jr-status"><i></i>Status · Delivered</span>
@@ -767,7 +919,7 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
                 <p>Handed over at the door, and marked delivered.</p>
                 <ul class="jr-facts"><li>Handed over in person</li><li>Marked delivered</li></ul>
                 <a class="btn primary" href="#contact">Book a delivery <svg aria-hidden="true"><use href="#arr"/></svg></a>
-                <img class="jr-mimg" src="img/door.jpg" alt="A house at night with its front door lit">
+                <img class="jr-mimg" src="img/door.jpg" srcset="img/m/door.jpg 900w, img/door.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="A house at night with its front door lit">
               </li>
             </ol>
           </div>
@@ -837,10 +989,10 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
         <p class="body" data-r>Four promises behind every delivery.</p>
       </div>
       <div class="vals" id="vals" data-r>
-        <div class="val act" tabindex="0"><img src="img/desert.jpg" alt="An empty road to the horizon at dusk"><div class="shade"></div><div class="cap"><span class="n">01</span><h3>Safe</h3><p>Loads handled with care at every handover.</p></div></div>
-        <div class="val" tabindex="0"><img src="img/port.jpg" alt="Container cranes lit at night"><div class="shade"></div><div class="cap"><span class="n">02</span><h3>Reliable</h3><p>Collected and delivered when we say.</p></div></div>
-        <div class="val" tabindex="0"><img src="img/interchange.jpg" alt="Aerial view of a highway interchange at night"><div class="shade"></div><div class="cap"><span class="n">03</span><h3>Efficient</h3><p>Planned routes and no wasted kilometres.</p></div></div>
-        <div class="val" tabindex="0"><img src="img/duskroad.jpg" alt="A rural road at sunset"><div class="shade"></div><div class="cap"><span class="n">04</span><h3>Professional</h3><p>One accountable team from pickup to delivery.</p></div></div>
+        <div class="val act" tabindex="0"><img src="img/desert.jpg" srcset="img/m/desert.jpg 900w, img/desert.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="An empty road to the horizon at dusk"><div class="shade"></div><div class="cap"><span class="n">01</span><h3>Safe</h3><p>Loads handled with care at every handover.</p></div></div>
+        <div class="val" tabindex="0"><img src="img/port.jpg" srcset="img/m/port.jpg 900w, img/port.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Container cranes lit at night"><div class="shade"></div><div class="cap"><span class="n">02</span><h3>Reliable</h3><p>Collected and delivered when we say.</p></div></div>
+        <div class="val" tabindex="0"><img src="img/interchange.jpg" srcset="img/m/interchange.jpg 900w, img/interchange.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="Aerial view of a highway interchange at night"><div class="shade"></div><div class="cap"><span class="n">03</span><h3>Efficient</h3><p>Planned routes and no wasted kilometres.</p></div></div>
+        <div class="val" tabindex="0"><img src="img/duskroad.jpg" srcset="img/m/duskroad.jpg 900w, img/duskroad.jpg 1800w" sizes="(max-width:500px) 50vw, 100vw" alt="A rural road at sunset"><div class="shade"></div><div class="cap"><span class="n">04</span><h3>Professional</h3><p>One accountable team from pickup to delivery.</p></div></div>
       </div>
     </div></div>
   </section>
@@ -946,18 +1098,24 @@ const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t *
 const lerp = (a, b, t) => a + (b - a) * t;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
-const FILM = 'film/hero.mp4';
+const TOUCH = matchMedia('(hover: none) and (pointer: coarse)').matches;
+const COMPACT = matchMedia('(max-width:860px),(hover:none) and (pointer:coarse) and (max-height:540px)').matches;
+const FILM = TOUCH && Math.min(screen.width, screen.height) < 600 ? 'film/hero-m.mp4' : 'film/hero.mp4'; // phones get a 3 MB, 960px encode with the same frames and keyframes
 let W = innerWidth, H = innerHeight;
 /* smooth scroll (lenis.dev defaults, darkroom's slightly snappier lerp); driven from frame() so every scroll effect reads the same position */
-const lenis = (!reduce && window.Lenis) ? new window.Lenis({ lerp: 0.11, smoothWheel: true, anchors: { offset: -80 }, autoRaf: false }) : null;
+const lenis = (!reduce && window.Lenis) ? new window.Lenis({ lerp: 0.11, smoothWheel: true, anchors: { offset: COMPACT ? 0 : -80 }, autoRaf: false }) : null;
 
 /* ================= 01 · Hero: the approved One Road preview, behaviour unchanged ================= */
-const hero = $('#home');
+const hero = $('#home'), stage = $('.stage');
+/* on touch the pinned stage (100svh) is the viewport: innerHeight changes as the address bar slides, the stage does not */
+const viewH = () => (TOUCH ? stage.offsetHeight : innerHeight);
+H = viewH();
 const film = $('#film'), plate = $('#plate'), route = $('#route'), rfade = $('#rfade'), headDot = $('#head');
 const fill = $('#fill'), dist = $('#dist'), eta = $('#eta'), cue = $('#cue');
 const beats = $$('.beat'), pins = $$('.road button');
 const win = [[-1, -1, .06, .14], [.18, .26, .42, .50], [.50, .56, .70, .77], [.80, .88, 2, 2]];
 film.src = FILM;
+if (TOUCH) cue.textContent = 'Swipe up to start the route';
 function layout() {
   const portrait = W / H < 1;
   plate.classList.toggle('portrait', portrait);
@@ -966,6 +1124,13 @@ function layout() {
     // a phone held sideways: lift the plate so the truck sits above the copy (text never crosses the truck)
     const short = H < 540;
     Object.assign(plate.style, { width: w + 'px', height: (w * 9 / 16) + 'px', left: '50%', top: short ? '36%' : '50%', transform: 'translate(-50%,-50%)' });
+  } else if (W <= 860) {
+    // phone or portrait tablet: frame film x 170 to 1000 so the whole cab, the logo and the route line behind the truck stay on screen
+    // the truck (centre at 41% of the film's height) sits in the clear space between the header and the tallest text beat
+    const k = W / 830, w = 1280 * k, h = w * 9 / 16;
+    const beatTop = H - Math.max(...beats.map((b) => parseFloat(getComputedStyle(b).bottom) + b.offsetHeight));
+    const top = ($('#siteHead').offsetHeight + beatTop) / 2 - 0.41 * h;
+    Object.assign(plate.style, { width: w + 'px', height: h + 'px', left: (-170 * k) + 'px', top: top + 'px', transform: 'none' });
   } else {
     const w = W * 1.75, h = w * 9 / 16;
     Object.assign(plate.style, { width: w + 'px', height: h + 'px', left: (W / 2 - 0.57 * w) + 'px', top: (H * 0.34 - 0.40 * h) + 'px', transform: 'none' });
@@ -1035,6 +1200,9 @@ function setMenu(open) { mnav.classList.toggle('open', open); menuBtn.setAttribu
 menuBtn.addEventListener('click', () => setMenu(!mnav.classList.contains('open')));
 mnav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
 addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+/* small screens: glide a target to just under the header */
+function glideTo(y) { if (lenis) lenis.scrollTo(y, { duration: 0.9 }); else scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); }
 
 /* ================= text helpers ================= */
 function splitLines(el) {
@@ -1146,6 +1314,27 @@ function storyFrame() {
   }
 }
 
+/* ================= Services on touch: there is no hover, so the door follows the thumb ================= */
+const bayEls = $$('.bay'), doors = bayEls.map((b) => ({ b, s: $('.shutter', b), p: 0, last: -1 }));
+const DOORS = TOUCH && !reduce;
+if (DOORS) bayEls.forEach((b) => b.classList.add('scrub'));
+let doorT = 0;
+function doorFrame(now) {
+  if (!DOORS) return;
+  const ease = 1 - Math.exp(-Math.min(100, now - doorT) / 110); doorT = now;
+  doors.forEach((d, i) => {
+    const r = d.b.getBoundingClientRect();
+    if (r.bottom < -H || r.top > H * 2) return;
+    const lag = d.b.offsetTop === bayEls[0].offsetTop ? i * 48 : 0; // doors side by side lift one after another
+    const t = smooth(0, 1, clamp((H * 0.86 - r.top - lag) / (r.height * 0.7)));
+    d.p += (t - d.p) * ease; if (Math.abs(t - d.p) < 0.002) d.p = t;
+    if (d.p === d.last) return;
+    d.last = d.p;
+    d.s.style.transform = `translateY(calc(${(-d.p * 100).toFixed(2)}% + ${(18 * d.p).toFixed(1)}px))`;
+    d.b.classList.toggle('open', d.p > 0.62);
+  });
+}
+
 /* ================= Band: pinned. frame opens to full bleed, then the city's lights come on, the network draws, the headline lights up ================= */
 const band = $('#band'), bandTrack = $('#bandTrack'), bandFrame = $('#bandFrame'), bandBg = $('#bandBg'), bandDark = $('#bandDark'), bandT = $('#bandT');
 const bdPct = $('#bdPct'), bdCaps = $('#bdCaps');
@@ -1203,6 +1392,7 @@ function sizeMap() {
 function placeLabels() { labA.style.left = rt.a[0] * mapK + 'px'; labA.style.top = rt.a[1] * mapK + 'px'; labB.style.left = rt.b[0] * mapK + 'px'; labB.style.top = rt.b[1] * mapK + 'px'; }
 new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { revealT0 = revealT0 ?? performance.now(); o.disconnect(); } }), { threshold: 0.25 }).observe(mapbox);
 if (FINE) { mapbox.addEventListener('pointermove', (e) => { const r = mapbox.getBoundingClientRect(); mouseMap = [(e.clientX - r.left) / mapK, (e.clientY - r.top) / mapK]; }); mapbox.addEventListener('pointerleave', () => (mouseMap = null)); }
+else { let mt = 0; mapbox.addEventListener('pointerdown', (e) => { const r = mapbox.getBoundingClientRect(); mouseMap = [(e.clientX - r.left) / mapK, (e.clientY - r.top) / mapK]; clearTimeout(mt); mt = setTimeout(() => (mouseMap = null), 1200); }, { passive: true }); }
 function mapFrame(now) {
   const r = mapbox.getBoundingClientRect();
   if (r.bottom < 0 || r.top > H) return;
@@ -1260,7 +1450,13 @@ $('#bookRoute').addEventListener('click', () => { if (lastRoute) { $('#qfrom').v
 
 /* ================= Why Tim's: expanding panels ================= */
 const vals = $$('.val');
-const setVal = (v) => vals.forEach((x) => x.classList.toggle('act', x === v));
+const setVal = (v) => {
+  vals.forEach((x) => x.classList.toggle('act', x === v));
+  if (W > 860) return;
+  const i = vals.indexOf(v), gap = parseFloat(getComputedStyle(v.parentElement).rowGap) || 0, tall = TOUCH && H <= 540 && W > H ? Math.min(240, H * 0.62) : Math.min(380, Math.max(280, H * 0.46));
+  const landsAt = v.parentElement.getBoundingClientRect().top + i * (92 + gap), clear = head.offsetHeight + 10;
+  if (landsAt < clear || landsAt + tall > H - 10) glideTo(landsAt + scrollY - clear);
+};
 vals.forEach((v) => { if (FINE) v.addEventListener('pointerenter', () => setVal(v)); v.addEventListener('focus', () => setVal(v)); v.addEventListener('click', () => setVal(v)); });
 
 /* ================= Track by reference: split-flap board ================= */
@@ -1324,8 +1520,10 @@ function goStep(n, dir) {
   sind.forEach((b, i) => { b.classList.toggle('cur', i === n); b.classList.toggle('done', i < n); });
   qback.hidden = n === 0;
   qnext.innerHTML = n === 2 ? 'Request a quote <svg aria-hidden="true"><use href="#arr"/></svg>' : 'Next <svg aria-hidden="true"><use href="#arr"/></svg>';
+  if (COMPACT) { alignCard(); return; }
   const first = $('input,select,textarea', to); if (first && document.activeElement && qcard.contains(document.activeElement)) first.focus({ preventScroll: true });
 }
+function alignCard() { const top = qcard.getBoundingClientRect().top, gap = head.offsetHeight + 10; if (top < gap || top > H * 0.4) glideTo(top + scrollY - gap); }
 function nudge(inp) { const f = inp.closest('.field'); f.classList.remove('cue'); void f.offsetWidth; f.classList.add('cue', 'bad'); inp.focus(); inp.addEventListener('input', () => f.classList.remove('bad'), { once: true }); }
 function valid(n) {
   if (n === 1) { for (const id of ['#qfrom', '#qto']) if (!$(id).value.trim()) { nudge($(id)); return false; } }
@@ -1339,6 +1537,7 @@ $('#qform').addEventListener('submit', (e) => {
   const svc = $('#qsvc').value, load = ($('input[name=load]:checked') || {}).value, f = $('#qfrom').value, t = $('#qto').value;
   $('#qsum').textContent = `${svc}, ${load ? load.toLowerCase() : ''}, ${f} → ${t}. In this prototype nothing is sent yet; once it’s connected, Tim’s team will come back to you.`;
   panes.forEach((p) => (p.hidden = true)); qok.classList.add('show'); $('#qacts').hidden = true; $('#sind').hidden = true;
+  if (COMPACT) alignCard();
 });
 qback.addEventListener('click', () => goStep(step - 1, -1));
 sind.forEach((b, i) => b.addEventListener('click', () => { if (i < step || valid(step)) goStep(i, i > step ? 1 : -1); }));
@@ -1356,12 +1555,12 @@ new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { 
 (() => { const c = document.createElement('canvas'); c.width = c.height = 140; const x = c.getContext('2d'), d = x.createImageData(140, 140); for (let i = 0; i < d.data.length; i += 4) { const v = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } x.putImageData(d, 0, 0); $('#grain').style.backgroundImage = `url(${c.toDataURL()})`; })();
 
 /* ================= loop + boot ================= */
-function frame(now) { if (lenis) lenis.raf(now); heroFrame(); abFrame(); headerFrame(); aboutFrame(); storyFrame(); bandFrameF(); mapFrame(now); requestAnimationFrame(frame); }
-function relayout() { W = innerWidth; H = innerHeight; layout(); sizeMap(); placeNodes(); fitWordmark(); $$('[data-split]').forEach((el) => { splitLines(el); }); }
+function frame(now) { if (lenis) lenis.raf(now); heroFrame(); doorFrame(now); abFrame(); headerFrame(); aboutFrame(); storyFrame(); bandFrameF(); mapFrame(now); requestAnimationFrame(frame); }
+function relayout() { W = innerWidth; H = viewH(); layout(); sizeMap(); placeNodes(); fitWordmark(); $$('[data-split]').forEach((el) => { splitLines(el); }); }
 const fontsReady = Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise((r) => setTimeout(r, 2500))]);
 layout();
-fontsReady.then(() => { $$('[data-split]').forEach(splitLines); armReveals(); sizeMap(); placeNodes(); fitWordmark(); });
-let rz = 0; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const wc = innerWidth !== W; W = innerWidth; H = innerHeight; layout(); sizeMap(); placeNodes(); fitWordmark(); if (wc) $$('[data-split]').forEach((el) => { const was = el.classList.contains('in'); splitLines(el); if (was) el.classList.add('in'); }); }, 150); });
+fontsReady.then(() => { $$('[data-split]').forEach(splitLines); armReveals(); sizeMap(); placeNodes(); fitWordmark(); if (W <= 860) layout(); });
+let rz = 0; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { const wc = innerWidth !== W; W = innerWidth; H = viewH(); layout(); sizeMap(); placeNodes(); fitWordmark(); if (wc) $$('[data-split]').forEach((el) => { const was = el.classList.contains('in'); splitLines(el); if (was) el.classList.add('in'); }); }, 150); });
 requestAnimationFrame(frame);
 void relayout;
 })();
