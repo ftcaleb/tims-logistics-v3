@@ -598,6 +598,26 @@ footer{position:relative;background:var(--navy-950);padding-top:clamp(70px,9vw,1
   .rd-stops li::before{width:16px;height:16px}
   .rd-truck{width:58px;top:-5px}
 }
+/* any touch-only screen, whatever its width (a tablet on its side keeps the desktop layout): sizing and labels for fingers */
+@media (hover:none) and (pointer:coarse){
+  html{scroll-padding-top:0}
+  a,button,input,select,textarea,label,.val{-webkit-tap-highlight-color:transparent}
+  a,button,.val{touch-action:manipulation}
+  .btn{min-height:44px}
+  .link{min-height:44px;padding-block:12px}
+  .mark{min-height:44px;min-width:44px}
+  .tele dt,.demo,.readout dt,.tprog .lbls{font-size:11px}
+  .tprog .lbls{letter-spacing:.03em}
+  .steps-ind button{min-height:44px;align-content:start;padding-top:6px}
+  .fgrid nav{gap:0}
+  .fgrid nav .h{margin-bottom:6px}
+  .fgrid nav a{display:flex;align-items:center;min-height:44px}
+  .road button{top:-10px;width:44px;height:44px;margin-left:-22px}
+  .road button::after{left:18px;top:18px}
+  .road button span{bottom:auto;top:34px;opacity:1;font:500 11px/1 var(--font-data);letter-spacing:.04em;color:var(--sand-60);transition:color .3s}
+  .road button.passed span{color:var(--sand-50)}
+  .road button:first-of-type span{left:18px;transform:none}
+}
 /* phones and portrait tablets */
 @media (max-width:860px){
   .bay-info .top{flex-wrap:wrap;gap:6px 12px}
@@ -1103,7 +1123,7 @@ const COMPACT = matchMedia('(max-width:860px),(hover:none) and (pointer:coarse) 
 const FILM = TOUCH && Math.min(screen.width, screen.height) < 600 ? 'film/hero-m.mp4' : 'film/hero.mp4'; // phones get a 3 MB, 960px encode with the same frames and keyframes
 let W = innerWidth, H = innerHeight;
 /* smooth scroll (lenis.dev defaults, darkroom's slightly snappier lerp); driven from frame() so every scroll effect reads the same position */
-const lenis = (!reduce && window.Lenis) ? new window.Lenis({ lerp: 0.11, smoothWheel: true, anchors: { offset: COMPACT ? 0 : -80 }, autoRaf: false }) : null;
+const lenis = (!reduce && window.Lenis) ? new window.Lenis({ lerp: 0.11, smoothWheel: true, anchors: { offset: COMPACT || TOUCH ? 0 : -80 }, autoRaf: false }) : null;
 
 /* ================= 01 · Hero: the approved One Road preview, behaviour unchanged ================= */
 const hero = $('#home'), stage = $('.stage');
@@ -1520,7 +1540,7 @@ function goStep(n, dir) {
   sind.forEach((b, i) => { b.classList.toggle('cur', i === n); b.classList.toggle('done', i < n); });
   qback.hidden = n === 0;
   qnext.innerHTML = n === 2 ? 'Request a quote <svg aria-hidden="true"><use href="#arr"/></svg>' : 'Next <svg aria-hidden="true"><use href="#arr"/></svg>';
-  if (COMPACT) { alignCard(); return; }
+  if (COMPACT || TOUCH) { alignCard(); return; }
   const first = $('input,select,textarea', to); if (first && document.activeElement && qcard.contains(document.activeElement)) first.focus({ preventScroll: true });
 }
 function alignCard() { const top = qcard.getBoundingClientRect().top, gap = head.offsetHeight + 10; if (top < gap || top > H * 0.4) glideTo(top + scrollY - gap); }
@@ -1537,7 +1557,7 @@ $('#qform').addEventListener('submit', (e) => {
   const svc = $('#qsvc').value, load = ($('input[name=load]:checked') || {}).value, f = $('#qfrom').value, t = $('#qto').value;
   $('#qsum').textContent = `${svc}, ${load ? load.toLowerCase() : ''}, ${f} → ${t}. In this prototype nothing is sent yet; once it’s connected, Tim’s team will come back to you.`;
   panes.forEach((p) => (p.hidden = true)); qok.classList.add('show'); $('#qacts').hidden = true; $('#sind').hidden = true;
-  if (COMPACT) alignCard();
+  if (COMPACT || TOUCH) alignCard();
 });
 qback.addEventListener('click', () => goStep(step - 1, -1));
 sind.forEach((b, i) => b.addEventListener('click', () => { if (i < step || valid(step)) goStep(i, i > step ? 1 : -1); }));
